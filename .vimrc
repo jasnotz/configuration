@@ -6,7 +6,10 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'  " VIM 플러그인 관리 플러그인
 
+Plugin 'frazrepo/vim-rainbow'
+Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/nerdtree'
+Plugin 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -25,7 +28,6 @@ set autoread " 작업 중인 파일 외부에서 변경됬을 경우 자동으�
 set cindent " C언어 자동 들여쓰기
 set bs=eol,start,indent
 set history=256
-set laststatus=2 " 상태바 표시 항상
 "set paste " 붙여넣기 계단현상 없애기
 set showmatch " 일치하는 괄호 하이라이팅
 set smartcase " 검색시 대소문자 구별
@@ -51,9 +53,12 @@ if has("syntax")
 endif
 
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-nmap <F6> :NERDTreeToggle<CR>
+nmap <C-q> :NERDTreeToggle<CR>
 
 highlight Comment ctermfg=green
+
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.py,*.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 inoremap " ""<left>
 inoremap ' ''<left>
